@@ -1,3 +1,15 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Ultimate Xray Reality Tester
+VPN Connection Tester with Loud Alarm - VLESS Reality + VMess
+"""
+
+__author__ = "hatinati2"
+__version__ = "1.0.0"
+__github__ = "https://github.com/hatinati2/ultimate-xray-tester"
+
 import os
 import json
 import time
@@ -178,7 +190,6 @@ def test_connection(port):
         r = requests.get("https://api.ipify.org", proxies=proxies, timeout=35)
         response_time = int((time.time() - start) * 1000)
         if r.status_code == 200:
-            # محاسبه پینگ واقعی به گوگل (TCP delay)
             ping_start = time.time()
             google = requests.get("https://google.com", proxies=proxies, timeout=10)
             tcp_delay = int((time.time() - ping_start) * 1000)
@@ -221,7 +232,6 @@ class ConfigTester:
         self.tcp_delay = tcp_delay or 0
         self.response_time = response_time or 0
 
-        # آلارم فوری به محض قطع شدن هر کانفیگ
         if self.was_connected and not connected:
             print(f"\a\a\a  ⚡⚡⚡ DISCONNECTED: {self.name} ⚡⚡⚡")
             play_long_alarm()
@@ -255,8 +265,9 @@ def load_saved_links():
 
 # ------------------- Main -------------------
 print("="*70)
-print("     Ultimate VPN Tester - VLESS Reality + AUTO SAVE + INSTANT LOUD ALARM")
-print("            TCP Delay + Response Time + Long Alarm on Drop")
+print("  Ultimate VPN Tester - VLESS Reality + AUTO SAVE + LOUD ALARM")
+print("         TCP Delay + Response Time + Long Alarm on Drop")
+print(f"  Version: {__version__} | GitHub: {__github__}")
 print("="*70)
 
 links = load_saved_links()
